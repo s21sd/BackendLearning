@@ -1,9 +1,14 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+
 require('dotenv').config();
+const MONGO_URL = process.env.MONGO_URL;
 
-mongoose.connect(process.env.MONGO_URL).then(() => {   //here U can also set your own database  like procees.env.DB_NAME 
-    console.log('Connected to database');
-}).catch((err) => {
-    console.log('Error connected' + err);
+mongoose.connect(MONGO_URL, {
+    dbName: 'todoAPP'
 })
-
+    .then(() => {
+        console.log('Mongodb Connected');
+    })
+    .catch((err) => {
+        console.log('Mongo connection failed ' + err);
+    })
