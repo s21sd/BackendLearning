@@ -1,18 +1,21 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const cors = require('cors');
-const todoRoutes = require('./ROUTES/TodoRoutes')
+const PORT = 3000;
+const cors = require("cors");
+const authRoutes=require('./ROUTES/authRoutes');
+const blogRoutes=require('./ROUTES/blogRoutes');
+require('dotenv').config();
 require('./db');
-const PORT = 8000;
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/todoRoutes', todoRoutes);
+app.use('/users',authRoutes);
+app.use('/blogs',blogRoutes);
+app.get("/", (req, res) => {
 
-app.get('/', (req, res) => {
     res.json({
-        message: "Api is working"
-    });
+        message: 'Welcome to the API'
+    })
 })
 
 app.listen(PORT, () => {
